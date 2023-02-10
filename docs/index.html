@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Stereotaxis</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
+</head>
+
+<body>
+    <style>
+        .row {
+            display: flex;
+        }
+    </style>
+    <script>
+        function calculate() {
+            let e_x = parseFloat(document.getElementById("e_x").value);
+            let e_y = parseFloat(document.getElementById("e_y").value);
+            let e_z = parseFloat(document.getElementById("e_z").value);
+            let t_x = parseFloat(document.getElementById("t_x").value);
+            let t_y = parseFloat(document.getElementById("t_y").value);
+            let t_z = parseFloat(document.getElementById("t_z").value);
+            let Dx = t_x - e_x;
+            let Dy = t_y - e_y;
+            let Dz = t_z - e_z;
+            let Dysq = Math.pow(Dy, 2.0);
+            let Dzsq = Math.pow(Dz, 2.0);
+            let M1M2 = Dysq + Dzsq;
+            let rootcal = Math.sqrt(M1M2);
+            let arc = 180.00 - (Math.atan2(rootcal, Dx) * 180 / Math.PI);
+            let ring = (Math.atan(Dy / Dz) * 180 / Math.PI) + 90;
+            if (!isNaN(arc) && !isNaN(ring)) {
+                document.getElementById("arc").textContent = "Arc: " + arc;
+                document.getElementById("ring").textContent = "Ring: " + ring;
+            }
+        }
+    </script>
+    <H1>Measure stearotactic angles</H1>
+    <div class="row">
+        <div>
+            <label>Target X</label>
+            <input type="number" id="t_x">
+            <label>Target Y</label>
+            <input type="number" id="t_y">
+            <label>Target Z</label>
+            <input type="number" id="t_z">
+        </div>
+        <div>
+            <label>Entry X</label>
+            <input type="number" id="e_x">
+            <label>Entry Y</label>
+            <input type="number" id="e_y">
+            <label>Entry Z</label>
+            <input type="number" id="e_z">
+        </div>
+    </div>
+    <div>
+        <button type="button" onclick="calculate()">Calculate</button>
+        <div id="arc">Arc: </div>
+        <div id="ring">Ring: </div>
+    </div>
+</body>
+
+</html>
