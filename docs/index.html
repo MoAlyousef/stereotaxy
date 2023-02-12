@@ -15,8 +15,7 @@
         .row {
             display: flex;
             justify-content: center;
-            padding: 5%;
-            width: 50%;
+            /* padding: 5%; */
         }
 
         .column {
@@ -26,6 +25,9 @@
             align-items: center;
             padding: 5%;
             align-content: center;
+        }
+        input {
+            width: 160px;
         }
     </style>
     <script>
@@ -57,6 +59,7 @@
         <div class="row">
             <div style="font-size: 24px; font-weight: bold; text-align: center;">Measure Stearotactic Angles</div>
         </div>
+        <br>
         <div class="row">
             <div class="column">
                 <label>Target X</label>
@@ -77,10 +80,10 @@
         </div>
         <div class="row">
             <div class="column">
+                <br>
                 <button type="button" style="font-weight: bold;" onclick="calculate()">Calculate</button>
                 <br>
                 <div id="arc">Arc: </div>
-                <br>
                 <div id="ring">Ring: </div>
             </div>
         </div>
