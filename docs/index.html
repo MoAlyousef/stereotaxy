@@ -6,13 +6,25 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Stereotaxis</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/kimeiga/bahunya/dist/bahunya.min.css">
+    <link rel="stylesheet" href="ridge.css">
+    <link rel="stylesheet" href="ridge-dark.css">
 </head>
 
 <body>
     <style>
         .row {
             display: flex;
+            justify-content: center;
+            padding: 5%;
+        }
+
+        .column {
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            padding: 2%;
+            align-content: center;
         }
     </style>
     <script>
@@ -32,38 +44,43 @@
             let rootcal = Math.sqrt(M1M2);
             let arc = 180.00 - (Math.atan2(rootcal, Dx) * 180 / Math.PI);
             let ring = (Math.atan(Dy / Dz) * 180 / Math.PI) + 90;
-            if (!isNaN(arc) && !isNaN(ring)) {
+            if (isNaN(arc) || isNaN(ring)) {
+                alert("Invalid entry!");
+            } else {
                 document.getElementById("arc").textContent = "Arc: " + arc;
                 document.getElementById("ring").textContent = "Ring: " + ring;
-            } else {
-                alert("Invalid entry!");
             }
         }
     </script>
-    <H1>Measure stearotactic angles</H1>
-    <div class="row">
-        <div>
-            <label>Target X</label>
-            <input type="number" id="t_x">
-            <label>Target Y</label>
-            <input type="number" id="t_y">
-            <label>Target Z</label>
-            <input type="number" id="t_z">
+    <div class="column">
+        <div style="font-size: 30px; font-weight: bold;">Measure Stearotactic Angles</div>
+        <div class="row">
+            <div class="column">
+                <label>Target X</label>
+                <input type="number" id="t_x">
+                <label>Target Y</label>
+                <input type="number" id="t_y">
+                <label>Target Z</label>
+                <input type="number" id="t_z">
+            </div>
+            <div class="column">
+                <label>Entry X</label>
+                <input type="number" id="e_x">
+                <label>Entry Y</label>
+                <input type="number" id="e_y">
+                <label>Entry Z</label>
+                <input type="number" id="e_z">
+            </div>
         </div>
-        <div>
-            <label>Entry X</label>
-            <input type="number" id="e_x">
-            <label>Entry Y</label>
-            <input type="number" id="e_y">
-            <label>Entry Z</label>
-            <input type="number" id="e_z">
+        <div class="column">
+            <button type="button" onclick="calculate()">Calculate</button>
+            <br>
+            <div id="arc">Arc: </div>
+            <br>
+            <div id="ring">Ring: </div>
         </div>
     </div>
-    <div>
-        <button type="button" onclick="calculate()">Calculate</button>
-        <div id="arc">Arc: </div>
-        <div id="ring">Ring: </div>
-    </div>
+
 </body>
 
 </html>
